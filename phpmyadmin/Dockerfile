@@ -1,7 +1,2 @@
-FROM phpmyadmin/phpmyadmin:latest
-
-ENV PMA_HOST=mariadb
-ENV PMA_USER=usuario
-ENV PMA_PASSWORD=senha
-
+FROM phpmyadmin:latest
 EXPOSE 80

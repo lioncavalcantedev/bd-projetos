@@ -2,25 +2,20 @@ version: '3.8'
 
 services:
   mariadb:
-    build: ./mariadb
-    ports:
-      - "3306:3306"
+    image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD=rootpassword
-      MYSQL_DATABASE=meu_banco
-      MYSQL_USER=usuario
-      MYSQL_PASSWORD=senha
+      MYSQL_ROOT_PASSWORD: rootpassword
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
 
   phpmyadmin:
-    build: ./phpmyadmin
+    image: phpmyadmin:latest
     ports:
       - "8080:80"
-    environment:
-      PMA_HOST=mariadb
-      PMA_USER=usuario
-      PMA_PASSWORD=senha
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
 
 volumes:
   mariadb_data:
